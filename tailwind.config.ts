@@ -12,6 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        "hero-img": "url('/ai.png')",
+        "robo-chat": "url('/robo-chat.png')"
+      },
     },
   },
   plugins: [],
