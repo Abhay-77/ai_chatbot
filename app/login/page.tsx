@@ -21,13 +21,11 @@ function LoginBox() {
           <input
             type="text"
             className="border border-black rounded-md w-full outline-none px-1"
-            
           />
           Password
           <input
             type="text"
             className="border border-black rounded-md w-full outline-none px-1"
-            
           />
           <button
             type="submit"
@@ -37,7 +35,7 @@ function LoginBox() {
           </button>
         </form>
         <h2 className="">
-          Don't have an account?
+          {"Don't have an account?"}
           <Link href="/signup" className="underline hover:text-gray-950">
             Sign up
           </Link>
