@@ -1,4 +1,4 @@
-export async function fetchFilteredHistory(_query?: string) {
+export async function fetchFilteredHistory() {
   return [
     { name: "hi", date: new Date().toISOString().split("T")[0] },
     { name: "hello", date: new Date().toISOString().split("T")[0] },

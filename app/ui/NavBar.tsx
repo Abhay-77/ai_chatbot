@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const NavBar = ({
@@ -8,7 +9,7 @@ const NavBar = ({
   return (
     <>
       <nav className="bg-black w-screen h-20 flex text-white items-center px-8 justify-between">
-        <img src="../favicon.ico" alt="icon" className="h-full" />
+        <Image src="/favicon.ico" alt="icon" className="h-full" width={80} height={80}/>
         <div className="flex items-center gap-8">
           {navItems &&
             navItems.map((element) => (
