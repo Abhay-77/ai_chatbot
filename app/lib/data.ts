@@ -6,7 +6,3 @@ export async function fetchFilteredHistory() {
   ];
 }
 
-export type historyItem = {
-  name: string;
-  date: string;
-};

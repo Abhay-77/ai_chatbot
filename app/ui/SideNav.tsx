@@ -1,4 +1,5 @@
-import { fetchFilteredHistory, historyItem } from "../lib/data";
+import { fetchFilteredHistory } from "../lib/data";
+import { historyItem } from "../lib/definitions";
 import SearchBar from "./SearchBar";
 import { Suspense } from "react";
 
