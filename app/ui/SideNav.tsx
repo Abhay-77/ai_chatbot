@@ -19,9 +19,9 @@ const SideNav = async () => {
         {historyItems.map((item) => (
           <div
             className=" hover:bg-gray-700 rounded-sm h-8 p-1 text-gray-400 hover:text-gray-200"
-            key={item.name}
+            key={item.id}
           >
-            {item.name}
+            {item.title}
           </div>
         ))}
       </div>

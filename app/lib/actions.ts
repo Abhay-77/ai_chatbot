@@ -7,6 +7,7 @@ import { AuthError } from "next-auth";
 import { State } from "./definitions";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
+import { revalidatePath } from "next/cache";
 
 const SignUpSchema = z.object({
   username: z.string().min(1, { message: "Enter your username" }),
@@ -101,5 +102,7 @@ export async function addHistory(email: string, formData: FormData) {
   const { error } = await db.from("history").insert(parsedData);
   if (error) {
     console.log(error)
+    return
   }
+  revalidatePath('/chatbot')
 }
