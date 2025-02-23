@@ -11,7 +11,7 @@ const Page = async ({
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-black text-white">
       <div className="w-full flex-none md:w-64 shadow-sm shadow-white p-3">
-        <SideNav />
+        <SideNav query={query} />
       </div>
       <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
         <PromptBar />

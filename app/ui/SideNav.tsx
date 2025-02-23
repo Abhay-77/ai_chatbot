@@ -6,8 +6,8 @@ import { FaPowerOff } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { signout } from "../lib/actions";
 
-const SideNav = async () => {
-  const historyItems: historyItem[] = await fetchFilteredHistory();
+const SideNav = async ({query}:{query:string}) => {
+  const historyItems: historyItem[] = await fetchFilteredHistory(query);
   return (
     <nav className="flex flex-col gap-5 h-[96vh]">
       <div className="">
