@@ -2,11 +2,14 @@ import { fetchFilteredHistory } from "../lib/data";
 import { historyItem } from "../lib/definitions";
 import SearchBar from "./SearchBar";
 import { Suspense } from "react";
+import { FaPowerOff } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { signout } from "../lib/actions";
 
 const SideNav = async () => {
   const historyItems: historyItem[] = await fetchFilteredHistory();
   return (
-    <nav className="flex flex-col gap-5 h-screen">
+    <nav className="flex flex-col gap-5 h-[96vh]">
       <div className="">
         <Suspense>
           <SearchBar />
@@ -22,6 +25,16 @@ const SideNav = async () => {
           </div>
         ))}
       </div>
+      <form action={signout}>
+        <Button
+        type="submit"
+          variant={"ghost"}
+          className="w-[60%] text-center flex items-center justify-center gap-3"
+        >
+          Sign Out
+          <FaPowerOff />
+        </Button>
+      </form>
     </nav>
   );
 };

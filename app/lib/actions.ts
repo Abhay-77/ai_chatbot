@@ -2,7 +2,7 @@
 
 import { db } from "@/supabase";
 import z from "zod";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 import { State } from "./definitions";
 import { redirect } from "next/navigation";
@@ -63,11 +63,43 @@ export async function addUser(
     };
   }
   const parsedData = parsedFormData.data;
-  const finalData = { ...parsedData, password: await bcrypt.hash(parsedData.password,10) };
-  console.log(finalData.password)
+  const checkUserAlreadyExists = await db
+    .from("users")
+    .select()
+    .eq("email", parsedData.email);
+  if (checkUserAlreadyExists.data?.length != 0) {
+    return { message: "Account already exists" };
+  }
+  const finalData = {
+    ...parsedData,
+    password: await bcrypt.hash(parsedData.password, 10),
+  };
+  console.log(finalData.password);
   const { error } = await db.from("users").insert(finalData);
   if (error) {
     return { message: "Something went wrong! TryAgain." };
   }
   redirect("/login");
+}
+
+export async function signout() {
+  await signOut({ redirectTo: "/" });
+}
+
+export async function addHistory(email: string, formData: FormData) {
+  const data = { title: formData.get("title"), user_email: email };
+  const parsedFormData = z
+    .object({
+      title: z.string().min(1),
+      user_email: z.string().email(),
+    })
+    .safeParse(data);
+  if (!parsedFormData.success) {
+    return;
+  }
+  const parsedData = parsedFormData.data;
+  const { error } = await db.from("history").insert(parsedData);
+  if (error) {
+    console.log(error)
+  }
 }

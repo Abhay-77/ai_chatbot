@@ -3,21 +3,21 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
-const SearchBar =  () => {
+const SearchBar = () => {
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();
-  const handleChange = (term: string) => {
+  const handleChange = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
     if (term) {
       params.set("query", term);
-    }
-    else {
-        params.delete('query')
+    } else {
+      params.delete("query");
     }
     replace(`${pathName}?${params.toString()}`);
-  };
+  }, 300);
   return (
     <div className="relative w-full">
       <IoSearchOutline
@@ -30,7 +30,7 @@ const SearchBar =  () => {
         onChange={(e) => {
           handleChange(e.target.value);
         }}
-        defaultValue={searchParams.get('query')?.toString()}
+        defaultValue={searchParams.get("query")?.toString()}
       />
     </div>
   );

@@ -7,14 +7,19 @@
   margin: 0;
 }
 
+
+
 ::-webkit-scrollbar {
-  @apply bg-black w-3
+  @apply bg-gray-900 w-3;
+  cursor: default;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-gray-900 m-4
+  @apply bg-gray-900 m-4;
+  cursor: default;  
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-700
+  @apply bg-gray-700;
+  cursor: default;
 }
 
 @layer base {
@@ -72,8 +77,6 @@
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {

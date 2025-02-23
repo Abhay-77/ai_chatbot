@@ -37,7 +37,7 @@ function LoginForm() {
           <label htmlFor="password">
             Password
             <input
-              type="text"
+              type="password"
               className="border border-black rounded-md w-full outline-none px-1"
               name="password"
               aria-describedby="password-error"
