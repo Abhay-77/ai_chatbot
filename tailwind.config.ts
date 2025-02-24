@@ -57,7 +57,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       backgroundImage: {
-        "hero-img": 'url("/ai.png")',
+        "hero-img": 'url("/ai-desktop.png")',
         "robo-chat": 'url("/robo-chat.png")',
       },
     },

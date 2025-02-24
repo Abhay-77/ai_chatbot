@@ -8,8 +8,21 @@ const NavBar = ({
 }) => {
   return (
     <>
-      <nav className="bg-black w-screen h-20 flex text-white items-center px-8 justify-between">
-        <Image src="/favicon.ico" alt="icon" className="h-full" width={80} height={80}/>
+      <nav className="bg-black w-screen h-14 sm:h-20 flex text-white items-center px-4 sm:px-8 justify-between">
+        <Image
+          src="/favicon.ico"
+          alt="icon"
+          className="h-full block sm:hidden"
+          width={60}
+          height={60}
+        />
+        <Image
+          src="/favicon.ico"
+          alt="icon"
+          className="h-full hidden sm:block"
+          width={80}
+          height={80}
+        />
         <div className="flex items-center gap-8">
           {navItems &&
             navItems.map((element) => (
