@@ -1,5 +1,6 @@
-import SideNav from "../ui/SideNav";
-import PromptBar from '../ui/PromptBar'
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import ChatBotBox from "./ChatBotBox";
 
 const Page = async ({
   searchParams,
@@ -9,14 +10,19 @@ const Page = async ({
   const params = await searchParams;
   const query = params.query;
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-black text-white">
-      <div className="w-full flex-none md:w-64 shadow-sm shadow-white p-3">
-        <SideNav query={query} />
+      <div className="flex h-screen overflow-hidden bg-black text-white">
+        <div className="w-auto md:w-64">
+          <SidebarProvider>
+            <AppSidebar query={query} />
+            <div className="md:hidden">
+              <SidebarTrigger />
+            </div>
+          </SidebarProvider>
+        </div>
+        <div className="flex flex-col flex-grow p-6 md:overflow-y-auto md:p-12">
+          <ChatBotBox />
+        </div>
       </div>
-      <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
-        <PromptBar />
-      </div>
-    </div>
   );
 };
 

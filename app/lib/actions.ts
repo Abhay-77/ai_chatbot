@@ -101,8 +101,18 @@ export async function addHistory(email: string, formData: FormData) {
   const parsedData = parsedFormData.data;
   const { error } = await db.from("history").insert(parsedData);
   if (error) {
-    console.log(error)
-    return
+    console.log(error);
+    return;
   }
-  revalidatePath('/chatbot')
+  revalidatePath("/chatbot");
+}
+
+export async function deleteHistoryItem(id: string) {
+  const { error } = await db.from("history").delete().eq("id", id);
+
+  if (error) {
+    console.log(error);
+  } else {
+    revalidatePath("/chatbot");
+  }
 }

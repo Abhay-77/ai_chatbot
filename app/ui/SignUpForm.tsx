@@ -8,7 +8,7 @@ function SignupBox() {
     const [errorMessage,formAction,isPending] = useActionState(addUser,{message:"",errors:{}})
   return (
     <>
-      <section className="flex flex-col w-1/3 p-10 gap-8 bg-white">
+      <section className="flex flex-col w-80 sm:w-1/3 p-10 gap-8 bg-white">
         <h1 className="text-4xl font-extrabold">Sign Up</h1>
         <form action={formAction} className="flex flex-col gap-4">
           <label htmlFor="username">
