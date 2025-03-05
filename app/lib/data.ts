@@ -28,6 +28,6 @@ export async function fetchFilteredHistory(query: string): Promise<historyItems>
   }
 }
 
-export async function getResponse(message:string): Promise<string> {
-  return "HELLO"
-}
+// export async function getResponse(message:string): Promise<string> {
+//   return "HELLO"
+// }
