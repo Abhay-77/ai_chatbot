@@ -7,7 +7,8 @@ const PromptBar: React.FC<{
   setInput: (value: string) => void;
   prompt: string;
   onClick: () => void;
-}> = ({ setInput, prompt, onClick }) => {
+  formAction: () => void
+}> = ({ setInput, prompt, onClick ,formAction }) => {
   function handleChange(e: ChangeEvent<HTMLTextAreaElement>): void {
     setInput(e.target.value);
   }
@@ -15,7 +16,7 @@ const PromptBar: React.FC<{
   return (
     <>
       <div className="relative bg-gray-800 rounded-lg">
-        {/* <form action=""> */}
+        <form action={formAction}>
         <Textarea
           className="border-none max-h-32 text-wrap w-[95%] text-gray-300 focus:outline-none focus:ring-0 focus-visible:ring-0"
           placeholder="Type something here"
@@ -24,7 +25,7 @@ const PromptBar: React.FC<{
           onChange={handleChange}
         />
         <Button
-          // type="submit"
+          type="submit"
           className="absolute top-1/2 -translate-y-1/2 right-2 bg-inherit"
           variant="outline"
           size="icon"
@@ -32,7 +33,7 @@ const PromptBar: React.FC<{
         >
           <FaArrowRight />
         </Button>
-        {/* </form> */}
+        </form>
       </div>
     </>
   );

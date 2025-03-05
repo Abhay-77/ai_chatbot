@@ -4,10 +4,13 @@ import { db } from "@/supabase";
 import z from "zod";
 import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
-import { State } from "./definitions";
+import { Message, State } from "./definitions";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { revalidatePath } from "next/cache";
+import { HfInference } from "@huggingface/inference";
+
+const client = new HfInference(process.env.HUGGINFACE_KEY);
 
 const SignUpSchema = z.object({
   username: z.string().min(1, { message: "Enter your username" }),
@@ -115,4 +118,29 @@ export async function deleteHistoryItem(id: string) {
   } else {
     revalidatePath("/chatbot");
   }
+}
+
+export async function getResponse(message: string): Promise<Message> {
+  const response = await client.chatCompletion({
+    model: "deepseek-ai/DeepSeek-R1",
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are an ai assisstant who have conversations with people , help them with coding",
+      },
+      {
+        role: "user",
+        content: message,
+      },
+    ],
+    provider: "hyperbolic",
+    max_tokens: 500,
+  });
+
+  const responseWithoutThink = response.choices[0].message.content?.replace(
+    /<think>[\s\S]*?<\/think>\n?/,
+    ""
+  );
+  return { role: "assistant", content: responseWithoutThink || "" };
 }
