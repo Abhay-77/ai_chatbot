@@ -16,4 +16,7 @@ export type State = {
   errors?: { username?: string[]; password?: string[]; email?: string[] };
 };
 
-export type Message = { role: "user" | "assistant"; content: string };
+export type Message = {
+  role: "user" | "assistant" | "system";
+  content: string;
+};

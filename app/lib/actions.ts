@@ -127,7 +127,7 @@ export async function getResponse(message: string): Promise<Message> {
       {
         role: "system",
         content:
-          "You are an ai assisstant who have conversations with people , help them with coding",
+          "You are an ai assisstant who have conversations with people and help them with coding",
       },
       {
         role: "user",
