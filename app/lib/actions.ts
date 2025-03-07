@@ -136,14 +136,12 @@ export async function getResponse(message: string): Promise<Message> {
         },
       ],
       provider: "hyperbolic",
-      max_tokens: 500,
+      max_tokens: 1000,
     });
-    console.log(response.choices[0].message.content);
     const responseWithoutThink = response.choices[0].message.content?.replace(
       /<think>[\s\S]*?<\/think>\n?/,
       ""
     );
-    console.log(responseWithoutThink);
     return { role: "assistant", content: responseWithoutThink || "" };
   } catch (error) {
     console.log(error);
