@@ -121,26 +121,32 @@ export async function deleteHistoryItem(id: string) {
 }
 
 export async function getResponse(message: string): Promise<Message> {
-  const response = await client.chatCompletion({
-    model: "deepseek-ai/DeepSeek-R1",
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are an ai assisstant who have conversations with people and help them with coding",
-      },
-      {
-        role: "user",
-        content: message,
-      },
-    ],
-    provider: "hyperbolic",
-    max_tokens: 500,
-  });
-
-  const responseWithoutThink = response.choices[0].message.content?.replace(
-    /<think>[\s\S]*?<\/think>\n?/,
-    ""
-  );
-  return { role: "assistant", content: responseWithoutThink || "" };
+  try {
+    const response = await client.chatCompletion({
+      model: "deepseek-ai/DeepSeek-R1",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an ai assisstant who have conversations with people and help them with coding",
+        },
+        {
+          role: "user",
+          content: message,
+        },
+      ],
+      provider: "hyperbolic",
+      max_tokens: 500,
+    });
+    console.log(response.choices[0].message.content);
+    const responseWithoutThink = response.choices[0].message.content?.replace(
+      /<think>[\s\S]*?<\/think>\n?/,
+      ""
+    );
+    console.log(responseWithoutThink);
+    return { role: "assistant", content: responseWithoutThink || "" };
+  } catch (error) {
+    console.log(error);
+    return { role: "assistant", content: "Error occured" };
+  }
 }
